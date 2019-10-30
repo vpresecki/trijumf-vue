@@ -11,8 +11,7 @@
         id="team-1"
         class="left"
         :placeholder="`${placeholder} ${index + 1}`"
-        v-model="teamName"
-        @keypress.enter="addTeam({id: team.id, name: teamName})"
+        @blur="addTeam({id: team.id, name: $event.target.value})"
       />
       <div class="start-game">
         <form action="/game">
@@ -22,7 +21,16 @@
             id="start-button"
             class="up"
             value="DODAJ"
+            v-if="getTeams.length < 4"
             @click="addTeam({id: getTeams.length+1, name: ''})"
+          />
+          <input
+            type="button"
+            id="start-button"
+            class="up"
+            value="OBRISI"
+            v-if="getTeams.length > 2"
+            @click.prevent="deleteTeam"
           />
         </form>
       </div>
@@ -40,12 +48,11 @@ import { mapActions } from 'vuex';
 export default {
   data() {
     return {
-      placeholder: 'Tim',
-      teamName: ''
+      placeholder: 'Tim'
     };
   },
   methods: {
-    ...mapActions(['initTeam', 'addTeam'])
+    ...mapActions(['initTeam', 'addTeam', 'deleteTeam'])
   },
   computed: {
     ...mapGetters(['getTeams'])
@@ -56,4 +63,5 @@ export default {
 };
 </script>
 
-<style src="../assets/styles/home.css"></style>
+<style src="../assets/styles/home.css">
+</style>

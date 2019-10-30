@@ -30,6 +30,9 @@ export const teams = {
           name: newTeam.name
         });
       }
+    },
+    deleteTeam: state => {
+      state.teams.pop();
     }
   },
   actions: {
@@ -38,6 +41,9 @@ export const teams = {
     },
     addTeam: ({ commit }, team) => {
       commit('addTeam', team);
+    },
+    deleteTeam: ({ commit }) => {
+      commit('deleteTeam');
     }
   }
 };
