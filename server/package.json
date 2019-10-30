@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "DEBUG=trijumf:* nodemon server"
+  },
+  "author": "Vedran Presecki",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4",
+    "line-reader": "^0.4.0"
+  }
+}

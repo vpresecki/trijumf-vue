@@ -1,0 +1,356 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  font: 20px 'Righteous', cursive;
+}
+
+body {
+  background-image: linear-gradient(
+    0deg,
+    rgba(43, 167, 218, 1) 0%,
+    rgba(83, 103, 173, 1) 100%
+  );
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.page-wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
+h2 {
+  text-align: center;
+  margin: 0 auto;
+  font-family: 'Saira Stencil One', cursive;
+  font-size: 5em;
+  text-transform: uppercase;
+  color: #f0f0f5;
+}
+.card-section {
+  width: 49%;
+  float: left;
+}
+.scene {
+  max-width: 320px;
+  width: 100%;
+  max-height: 100%;
+  height: 65vh;
+  margin: 0 auto;
+  perspective: 600px;
+}
+.game-board {
+  width: 49%;
+  float: right;
+}
+.card {
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+}
+.card_face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background-image: linear-gradient(to bottom, #f0f0f5 50%, transparent 100%);
+  border-radius: 25px;
+  box-shadow: 0px 3px 7px 6px rgba(0, 0, 0, 0.18);
+  backface-visibility: hidden;
+  display: table;
+}
+.content-align {
+  display: table-cell;
+  vertical-align: middle;
+}
+.card__face--back {
+  transform: rotateY(180deg);
+}
+.card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+#game-words,
+.draw-card {
+  text-align: center;
+}
+
+#game-words label {
+  width: 100%;
+  color: black;
+  text-transform: uppercase;
+  margin: 20px 0;
+  display: inline-block;
+}
+#game-words i {
+  margin-left: 20px;
+  visibility: hidden;
+}
+.good-answer {
+  visibility: visible;
+}
+
+.teams {
+  color: #f0f0f5;
+  width: 80%;
+  margin: 0 auto;
+}
+.team {
+  padding: 5px;
+  width: 100%;
+  margin: 0 auto 25px auto;
+  border-bottom: 5px solid;
+  border-image: linear-gradient(to right, #f0f0f5, rgba(0, 0, 0, 0)) 1 10%;
+}
+.team h3,
+.team span {
+  font-size: 60px;
+  display: inline-block;
+  text-transform: uppercase;
+}
+.team span {
+  float: right;
+}
+
+#timer {
+  width: 20%;
+  padding: 15px;
+  margin: 0 auto 15px auto;
+  border: 1px solid #f0f0f5;
+  border-radius: 10px;
+  background-color: #f0f0f5;
+  text-align: center;
+  font-size: 1.5em;
+}
+#next-player-button {
+  display: block;
+  width: 40%;
+  background-image: linear-gradient(to right, #f0f0f5, #2ba7da);
+  background-size: 200%;
+  margin: 0 auto;
+  border-radius: 50px;
+  padding: 30px;
+  box-shadow: 0px 3px 7px 6px rgba(0, 0, 0, 0.18);
+}
+#next-player-button:hover {
+  background-position: right center;
+  transition: 0.7s;
+}
+footer {
+  color: #f0f0f5;
+  text-align: center;
+  font-size: 15px;
+  opacity: 0.8;
+  margin-top: 3.5em;
+}
+.good-answer {
+  text-decoration: line-through;
+}
+
+.clear {
+  clear: both;
+}
+
+.flip {
+  transform: rotateY('180deg');
+}
+.finish {
+  display: none;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.modal {
+  width: 50%;
+  background-image: linear-gradient(to right, #f0f0f5 60%, #2ba7da 100%);
+  margin: 0 auto;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  border-radius: 25px;
+  padding: 10px;
+  animation: slideUp 1s;
+}
+.modal-header h2 {
+  width: 100%;
+  color: #2ba7da;
+  font-size: 45px;
+  text-align: center;
+}
+.modal-header span {
+  font-size: 35px;
+  color: black;
+}
+.modal-header span:hover {
+  cursor: pointer;
+}
+.modal-body,
+.modal-footer {
+  width: 100%;
+  text-align: center;
+  margin: 12px auto;
+}
+.show {
+  display: block;
+}
+.disabled {
+  opacity: 0.5;
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(+100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*Media queries*/
+
+/*Tablet*/
+@media only screen and (min-width: 480px) and (max-width: 1024px) {
+  h2 {
+    font-size: 2.5em;
+  }
+  .card-section {
+    width: 100%;
+    margin: 10px auto;
+    clear: both;
+  }
+  .game-board {
+    width: 100%;
+    margin: 10px auto;
+    clear: both;
+  }
+  .scene {
+    max-width: 250px;
+    width: 100%;
+    height: 55vh;
+  }
+  .teams {
+    width: 50%;
+    margin: 5px auto 20px auto;
+  }
+  .team {
+    display: inline-block;
+    width: 40%;
+    margin-bottom: 10px;
+  }
+  .team2 {
+    float: right;
+  }
+  .team h3,
+  .team span {
+    font-size: 20px;
+  }
+  .time {
+    margin: 0 auto 15px auto;
+  }
+  #timer {
+    width: 12%;
+    margin: 0 auto;
+    clear: both;
+    font-size: 20px;
+    padding: 10px;
+  }
+  #next-player-button {
+    width: 25%;
+    padding: 20px;
+    font-size: 12px;
+    border-radius: 30px;
+  }
+  footer {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+}
+
+/* Mobile*/
+@media only screen and (min-width: 240px) and (max-width: 480px) {
+  h2 {
+    font-size: 1.5em;
+  }
+  .card-section {
+    width: 100%;
+    margin: 0 auto;
+    clear: both;
+  }
+  .game-board {
+    width: 100%;
+    margin: 0 auto;
+    clear: both;
+  }
+  .scene {
+    max-width: 250px;
+    width: 100%;
+    height: 55vh;
+  }
+  .teams {
+    width: 50%;
+    margin: 5px auto 2px auto;
+  }
+  .team {
+    display: inline-block;
+    width: 40%;
+    margin-bottom: 10px;
+  }
+  .team2 {
+    float: right;
+  }
+  .team h3,
+  .team span {
+    font-size: 20px;
+  }
+  .time {
+    margin: 0 auto 10px auto;
+  }
+  #timer {
+    width: 20%;
+    margin: 0 auto;
+    clear: both;
+    font-size: 20px;
+    padding: 10px;
+  }
+  #next-player-button {
+    width: 40%;
+    padding: 20px;
+    font-size: 12px;
+    border-radius: 30px;
+  }
+  footer {
+    font-size: 12px;
+  }
+}
+
+.load {
+  z-index: -100;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f5;
+  position: absolute;
+  animation: fadeOut 3s;
+  opacity: 0;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    z-index: 100;
+  }
+  to {
+    opacity: 0;
+    z-index: -100;
+  }
+}
