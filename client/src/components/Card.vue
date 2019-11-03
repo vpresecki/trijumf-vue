@@ -1,37 +1,51 @@
 <template>
-  <div>
+  <transition mode="out-in" name="flip">
     <div class="card-section">
-      <div class="scene">
-        <transition name="flip">
-          <div class="card">
-            <div class="draw-card card_face">
-              <h3 class="content-align">IZVUCI KARTU</h3>
-            </div>
-            <div id="game-words" class="card_face card__face--back">
-              <div class="content-align" id="width">
-                <h3 class="word-0"></h3>
-                <br />
-                <h3 class="word-1"></h3>
-                <br />
-                <h3 class="word-2"></h3>
-                <br />
-                <h3 class="word-3"></h3>
-                <br />
-                <h3 class="word-4"></h3>
-                <br />
-              </div>
-            </div>
-          </div>
-        </transition>
+      <div @click="toggleComponent">
+        <component :is="activeComponent"></component>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
+import DrawCard from './DrawCard';
+import Words from './Words';
+import { mapGetters } from 'vuex';
+
 export default {
-  data() {
-    return {};
+  methods: {
+    toggleComponent() {
+      this.activeComponent = 'app-words';
+    }
+  },
+  computed: {
+    ...mapGetters(['isCardDrawn']),
+    activeComponent() {
+      return this.$store.getters.isCardDrawn ? 'app-words' : 'app-draw-card';
+    }
+  },
+  components: {
+    appDrawCard: DrawCard,
+    appWords: Words
   }
 };
 </script>
+
+<style>
+.flip-enter {
+  transform: rotateY(0deg);
+}
+
+.flip-enter-active {
+  animation: flip-in 0.5s ease-out forwards;
+}
+
+.flip-leave {
+  transform: rotateY(0deg);
+}
+
+.flip-leave-active {
+  animation: flip-out 0.5s ease-out forwards;
+}
+</style>

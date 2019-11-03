@@ -14,25 +14,26 @@
         @blur="addTeam({id: team.id, name: $event.target.value})"
       />
       <div class="start-game">
-        <form action="/game">
-          <input type="submit" id="start-button" class="up" value="START" />
+
+
+          <router-link :to="{name: 'game'}" class="start-game">
+            <input type="submit" id="start-button" class="up" value="START" />
+          </router-link>
+            <input
+                    type="button"
+                    class="up"
+                    value="DODAJ"
+                    v-if="getTeams.length < 4"
+                    @click="addTeam({id: getTeams.length+1, name: ''})"
+            />
+
           <input
             type="button"
-            id="start-button"
-            class="up"
-            value="DODAJ"
-            v-if="getTeams.length < 4"
-            @click="addTeam({id: getTeams.length+1, name: ''})"
-          />
-          <input
-            type="button"
-            id="start-button"
             class="up"
             value="OBRISI"
             v-if="getTeams.length > 2"
             @click.prevent="deleteTeam"
           />
-        </form>
       </div>
     </div>
 

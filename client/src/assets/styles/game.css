@@ -90,6 +90,9 @@ h2 {
   margin-left: 20px;
   visibility: hidden;
 }
+.word {
+  margin: 50px 0;
+}
 .good-answer {
   visibility: visible;
 }
