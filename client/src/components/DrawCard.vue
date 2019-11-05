@@ -1,6 +1,6 @@
 <template>
   <div class="scene">
-    <div class="card" @click="drawCard">
+    <div class="card" @click="drawCard(), startTimeout(getStartTime)">
       <div class="draw-card card_face">
         <h3 class="content-align">IZVUCI KARTU</h3>
       </div>
@@ -9,10 +9,13 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
   methods: {
-    ...mapActions(['drawCard'])
+    ...mapActions(['drawCard', 'startTimeout'])
+  },
+  computed: {
+    ...mapGetters(['getStartTime'])
   },
 
   name: 'DrawCard.vue'

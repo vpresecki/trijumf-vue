@@ -1,48 +1,38 @@
 export const timer = {
   state: {
-    timer: null,
-    totalTime: 3 * 60,
-    resetButton: false
+    startTime: 180,
+    endTime: undefined,
+    interval: undefined
   },
   getters: {
-    getTotalTime(state) {
-      return state.totalTime;
+    getStartTime(state) {
+      return state.startTime;
     },
-    getTimer(state) {
-      return state.timer;
+    getEndTime(state) {
+      return state.endTime;
     }
   },
   mutations: {
-    countdown(state) {
-      if (state.totalTime >= 1) {
-        state.totalTime--;
-      } else {
-        state.totalTime = 0;
-        store.commit('resetTimer');
-      }
+    setEndTime(state, turnTime) {
+      state.endTime = turnTime;
+      clearInterval(state.interval);
+      state.startTime = 180;
     },
-    resetTimer(state) {
-      state.totalTime = 3 * 60;
-      clearInterval(state.timer);
-      state.timer = null;
-      state.resetButton = false;
-    },
-    stopTimer(state) {
-      clearInterval(state.timer);
-      state.timer = null;
-      state.resetButton = true;
+    startTimeout(state) {
+      state.interval = setInterval(() => {
+        state.startTime > 0 ? state.startTime-- : (state.startTime = 0);
+      }, 1000);
     }
   },
   actions: {
     nextPlayer({ commit }, state) {
       commit('nextPlayer', { root: true }, state);
     },
-    startTimer({ commit }, state) {
-      state.timer = setInterval(() => commit('countdown', state), 1000);
-      state.resetButton = true;
+    setEndTime({ commit }, turnTime) {
+      commit('setEndTime', turnTime);
     },
-    stopTimer({ commit }, state) {
-      commit('stopTimer', state);
+    startTimeout({ commit }, state) {
+      commit('startTimeout', state);
     }
   }
 };

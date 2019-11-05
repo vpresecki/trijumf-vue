@@ -1,8 +1,10 @@
 <template>
   <div class="time">
-    <p id="timer">{{minutes}}:{{seconds}}</p>
-    <p>{{getTotalTime}}</p>
-    <button @click="nextPlayer(), startTimer()" id="next-player-button">Sljedeći igrač &raquo;</button>
+    <p id="timer">{{ convertTime }}</p>
+    <button
+      @click="nextPlayer(), setEndTime(convertTime)"
+      id="next-player-button"
+    >Sljedeći igrač &raquo;</button>
   </div>
 </template>
 
@@ -10,24 +12,16 @@
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 export default {
-  data() {
-    return {};
-  },
   methods: {
-    ...mapActions(['nextPlayer', 'startTimer', '']),
-    padTime: function(time) {
-      return (time < 10 ? '0' : '') + time;
-    }
+    ...mapActions(['nextPlayer', 'setEndTime', 'startTimeout'])
   },
   computed: {
-    ...mapGetters(['getTotalTime', 'getTimer']),
-    minutes: function() {
-      const minutes = Math.floor(this.$store.getters.getTotalTime / 60);
-      return this.padTime(minutes);
-    },
-    seconds: function() {
-      const seconds = this.$store.getters.getTotalTime - this.minutes * 60;
-      return this.padTime(seconds);
+    ...mapGetters(['getStartTime']),
+    convertTime() {
+      let min = Math.floor(this.$store.getters.getStartTime / 60);
+      let sec = this.$store.getters.getStartTime % 60;
+      sec < 10 ? (sec = `0${sec}`) : sec;
+      return `0${min}:${sec}`;
     }
   }
 };

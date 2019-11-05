@@ -12,11 +12,13 @@ export const teams = {
       state.teams.push(
         {
           id: 1,
-          name: ''
+          name: '',
+          score: 0
         },
         {
           id: 2,
-          name: ''
+          name: '',
+          score: 0
         }
       );
     },
@@ -27,7 +29,8 @@ export const teams = {
       } else {
         state.teams.push({
           id: newTeam.id,
-          name: newTeam.name
+          name: newTeam.name,
+          score: 0
         });
       }
     },

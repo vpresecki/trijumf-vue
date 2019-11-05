@@ -1,5 +1,7 @@
 <template>
-  <footer>Copyright &copy; Vedran Presecki</footer>
+  <div class="footer">
+    <footer>Copyright &copy; VEKY</footer>
+  </div>
 </template>
 
 <script>
