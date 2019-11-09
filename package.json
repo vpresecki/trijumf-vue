@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
-    "dev": "DEBUG=trijumf:* nodemon server"
+    "start": "node server/server",
+    "dev": "DEBUG=trijumf:* nodemon server/server"
   },
   "author": "Vedran Presecki",
   "license": "ISC",
