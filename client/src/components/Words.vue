@@ -21,14 +21,24 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      words: []
+      words: [],
+      drawnCards: []
     };
   },
-  mounted() {
+  beforeCreate() {
+    // axios.get('/api/trijumf/game/words').then(response => {
+    //   response.data.forEach(word => {
+    //     this.words.push(word);
+    //   });
+    // });
     axios.get('/api/trijumf/game/words').then(response => {
-      response.data.forEach(word => {
-        this.words.push(word);
-      });
+      this.words.push(
+        response.data[Math.floor(Math.random() * response.data.length)],
+        response.data[Math.floor(Math.random() * response.data.length)],
+        response.data[Math.floor(Math.random() * response.data.length)],
+        response.data[Math.floor(Math.random() * response.data.length)],
+        response.data[Math.floor(Math.random() * response.data.length)]
+      );
     });
   },
   name: 'Words.vue'

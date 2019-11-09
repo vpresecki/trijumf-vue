@@ -4,8 +4,8 @@ const cors = require("cors");
 
 server.use(cors());
 
-const homeRoute = require("./routes/words");
-server.use("/api/trijumf/game", homeRoute);
+const gameRoute = require("./routes/words");
+server.use("/api/trijumf/game", gameRoute);
 
 // Handle production
 if (process.env.NODE_ENV === "production") {
