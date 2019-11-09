@@ -1,6 +1,5 @@
 <template>
   <div class="time">
-    <p>{{getEndTime}}</p>
     <p id="timer">{{ convertTime }}</p>
     <button
       @click="nextPlayer(), setEndTime(convertTime),bonusScore(getEndTime) ,changeActiveTeam()"
