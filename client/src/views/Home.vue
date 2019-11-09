@@ -10,16 +10,17 @@
         type="text"
         id="team-1"
         class="left"
+        autocomplete="off"
         :placeholder="`${placeholder} ${index + 1}`"
         @blur="addTeam({id: team.id, name: $event.target.value})"
       />
       <div class="start-game">
         <router-link :to="{name: 'game'}" class="start-game">
-          <input type="submit" id="start-button" class="up" value="START" />
+          <input type="submit" id="start-button" value="START" />
         </router-link>
         <input
           type="button"
-          class="up"
+          id="start-button"
           value="DODAJ"
           v-if="getTeams.length < 4"
           @click="addTeam({id: getTeams.length+1, name: ''})"
@@ -27,7 +28,7 @@
 
         <input
           type="button"
-          class="up"
+          id="start-button"
           value="OBRISI"
           v-if="getTeams.length > 2"
           @click.prevent="deleteTeam"
@@ -55,7 +56,7 @@ export default {
     ...mapGetters(['getTeams'])
   },
   created() {
-    this.initTeam();
+    this.$store.getters.getTeams;
   },
   components: {
     appFooter: Footer

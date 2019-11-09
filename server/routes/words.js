@@ -9,18 +9,20 @@ lineReader.eachLine("./words.txt", line => {
 });
 
 // INSERT WORDS FROM FILE TO DATABASE
-// router.post("/", async (req, res) => {
-//   const w = await loadWords();
-//   await words.forEach(word => {
-//     w.insertOne({
-//       word: word
-//     });
-//   });
-//   res.status(201).send();
-// });
+
+router.post("/", async (req, res) => {
+  const w = await loadWords();
+  await words.forEach(word => {
+    w.insertOne({
+      word: word,
+      goodAnswer: false
+    });
+  });
+  res.status(201).send();
+});
 
 // GET ALL WORDS FROM DATABASE AND FORM AN ARRAY
-router.get("/", async (req, res) => {
+router.get("/words", async (req, res) => {
   const words = await loadWords();
   res.send(await words.find({}).toArray());
 });

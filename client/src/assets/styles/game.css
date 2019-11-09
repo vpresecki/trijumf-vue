@@ -119,6 +119,11 @@ h2 {
   float: right;
 }
 
+.activeTeam {
+  color: #6abd56;
+  text-shadow: 3px 3px #070708;
+}
+
 #timer {
   width: 20%;
   padding: 15px;

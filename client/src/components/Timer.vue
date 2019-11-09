@@ -1,8 +1,9 @@
 <template>
   <div class="time">
+    <p>{{getEndTime}}</p>
     <p id="timer">{{ convertTime }}</p>
     <button
-      @click="nextPlayer(), setEndTime(convertTime)"
+      @click="nextPlayer(), setEndTime(convertTime),bonusScore(getEndTime) ,changeActiveTeam()"
       id="next-player-button"
     >Sljedeći igrač &raquo;</button>
   </div>
@@ -13,10 +14,15 @@ import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 export default {
   methods: {
-    ...mapActions(['nextPlayer', 'setEndTime', 'startTimeout'])
+    ...mapActions([
+      'nextPlayer',
+      'setEndTime',
+      'changeActiveTeam',
+      'bonusScore'
+    ])
   },
   computed: {
-    ...mapGetters(['getStartTime']),
+    ...mapGetters(['getStartTime', 'getTeams', 'getEndTime']),
     convertTime() {
       let min = Math.floor(this.$store.getters.getStartTime / 60);
       let sec = this.$store.getters.getStartTime % 60;

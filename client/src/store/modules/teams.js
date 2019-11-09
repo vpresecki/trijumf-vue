@@ -1,6 +1,19 @@
 export const teams = {
   state: {
-    teams: []
+    teams: [
+      {
+        id: 1,
+        name: '',
+        score: 0,
+        active: true
+      },
+      {
+        id: 2,
+        name: '',
+        score: 0,
+        active: false
+      }
+    ]
   },
   getters: {
     getTeams: state => {
@@ -8,20 +21,22 @@ export const teams = {
     }
   },
   mutations: {
-    initTeam: state => {
-      state.teams.push(
-        {
-          id: 1,
-          name: '',
-          score: 0
-        },
-        {
-          id: 2,
-          name: '',
-          score: 0
-        }
-      );
-    },
+    // initTeam: state => {
+    //   state.teams.push(
+    //     {
+    //       id: 1,
+    //       name: '',
+    //       score: 0,
+    //       active: true
+    //     },
+    //     {
+    //       id: 2,
+    //       name: '',
+    //       score: 0,
+    //       active: false
+    //     }
+    //   );
+    // },
     addTeam: (state, newTeam) => {
       const team = state.teams.find(el => el.id === newTeam.id);
       if (team) {
@@ -30,12 +45,38 @@ export const teams = {
         state.teams.push({
           id: newTeam.id,
           name: newTeam.name,
-          score: 0
+          score: 0,
+          active: false
         });
       }
     },
     deleteTeam: state => {
       state.teams.pop();
+    },
+    changeActiveTeam: state => {
+      let currentActive = state.teams.find(team => team.active === true);
+      let indexOfActive = state.teams.indexOf(currentActive);
+      if (indexOfActive === state.teams.length - 1) {
+        currentActive.active = false;
+        state.teams[0].active = true;
+      } else {
+        state.teams[indexOfActive + 1].active = true;
+        currentActive.active = false;
+      }
+    },
+    bonusScore: (state, endTime) => {
+      let currentActive = state.teams.find(team => team.active === true);
+      if (endTime >= 150) {
+        currentActive.score += 10;
+      } else if (endTime >= 120) {
+        currentActive.score += 5;
+      } else if (endTime >= 90) {
+        currentActive.score += 2;
+      } else if (endTime >= 60) {
+        currentActive.score += 1;
+      } else {
+        currentActive += 0;
+      }
     }
   },
   actions: {
@@ -47,6 +88,12 @@ export const teams = {
     },
     deleteTeam: ({ commit }) => {
       commit('deleteTeam');
+    },
+    changeActiveTeam({ commit }, state) {
+      commit('changeActiveTeam', state);
+    },
+    bonusScore({ commit }, state, endTime) {
+      commit('bonusScore', state, endTime);
     }
   }
 };

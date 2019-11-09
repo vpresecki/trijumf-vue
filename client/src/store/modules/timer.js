@@ -9,7 +9,12 @@ export const timer = {
       return state.startTime;
     },
     getEndTime(state) {
-      return state.endTime;
+      if (state.endTime) {
+        let originalTime = state.endTime.split(':');
+        let min = parseInt(originalTime[0]) * 60;
+        let sec = parseInt(originalTime[1]);
+        return `${min + sec}`;
+      }
     }
   },
   mutations: {
