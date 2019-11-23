@@ -27,8 +27,23 @@ const getWords = async () => {
   return await db.find({}).toArray();
 };
 
-// TAKE 5 WORDS THAT WILL BE SEND TO FRONT
-let drawWords = async () => {};
+// TAKE 5 WORDS AND SEND TO FRONT
+let drawWords = async () => {
+  let words = await getWords();
+  let rndNum = new Set();
+  for (let i = 0; i < 5; i++) {
+    while (rndNum.size != 5)
+      rndNum.add(Math.floor(Math.random() * words.length));
+  }
+  let itterator = rndNum.values();
+  return [
+    words[itterator.next().value],
+    words[itterator.next().value],
+    words[itterator.next().value],
+    words[itterator.next().value],
+    words[itterator.next().value]
+  ];
+};
 
 // SEND WORDS TO FRONT
 router.get("/words", async (req, res) => {

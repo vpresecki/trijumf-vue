@@ -1,17 +1,33 @@
 <template>
-  <div class="card-section">
-    <component :is="activeComponent"></component>
+  <div>
+    <div class="card-section">
+      <component :words="words" :is="activeComponent"></component>
+    </div>
+    <div class="game-board">
+      <appTimer :words="words"></appTimer>
+    </div>
   </div>
 </template>
 
 <script>
 import DrawCard from './DrawCard';
 import Words from './Words';
+import Timer from '../components/Timer';
+import axios from 'axios';
 import { mapGetters } from 'vuex';
 
 export default {
   data() {
-    return {};
+    return {
+      words: []
+    };
+  },
+  mounted() {
+    axios.get('/api/trijumf/game/words').then(response => {
+      response.data.forEach(word => {
+        this.words.push(word);
+      });
+    });
   },
 
   computed: {
@@ -23,10 +39,10 @@ export default {
   },
   components: {
     appDrawCard: DrawCard,
-    appWords: Words
+    appWords: Words,
+    appTimer: Timer
   }
 };
 </script>
 
-<style>
-</style>
+<style></style>

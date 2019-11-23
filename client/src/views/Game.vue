@@ -3,11 +3,10 @@
     <div class="load"></div>
     <div class="page-wrapper">
       <h2>Trijumf</h2>
-      <app-card></app-card>
       <div class="game-board">
         <app-teams></app-teams>
-        <app-timer></app-timer>
       </div>
+      <app-card></app-card>
     </div>
     <div class="clear"></div>
     <app-footer></app-footer>
@@ -18,16 +17,11 @@
 <script>
 import Card from '../components/Card';
 import Teams from '../components/Teams';
-import Timer from '../components/Timer';
 import Footer from '../components/Footer';
 export default {
-  data() {
-    return {};
-  },
   components: {
     appCard: Card,
     appTeams: Teams,
-    appTimer: Timer,
     appFooter: Footer
   }
 };

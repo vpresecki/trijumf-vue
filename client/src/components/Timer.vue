@@ -2,9 +2,16 @@
   <div class="time">
     <p id="timer">{{ convertTime }}</p>
     <button
-      @click="nextPlayer(), setEndTime(convertTime),bonusScore(getEndTime) ,changeActiveTeam()"
+      @click="
+        nextPlayer(),
+          setEndTime(convertTime),
+          checkBonusScore(),
+          changeActiveTeam()
+      "
       id="next-player-button"
-    >Sljedeći igrač &raquo;</button>
+    >
+      Sljedeći igrač &raquo;
+    </button>
   </div>
 </template>
 
@@ -12,13 +19,20 @@
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 export default {
+  props: ['words'],
   methods: {
     ...mapActions([
       'nextPlayer',
       'setEndTime',
       'changeActiveTeam',
       'bonusScore'
-    ])
+    ]),
+    checkBonusScore() {
+      const scoredWords = this.words.filter(word => word.goodAnswer === true);
+      scoredWords.length === 5
+        ? this.$store.dispatch('bonusScore', this.$store.getters.getEndTime)
+        : 0;
+    }
   },
   computed: {
     ...mapGetters(['getStartTime', 'getTeams', 'getEndTime']),

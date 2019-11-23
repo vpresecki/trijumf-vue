@@ -7,9 +7,11 @@
             v-for="(word, index) in words"
             :key="index"
             @click="word.goodAnswer = !word.goodAnswer"
-            :class="{'good-answer': word.goodAnswer}"
+            :class="{ 'good-answer': word.goodAnswer }"
             class="word"
-          >{{word.word}}</h3>
+          >
+            {{ word.word }}
+          </h3>
         </div>
       </div>
     </div>
@@ -17,30 +19,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
-  data() {
-    return {
-      words: [],
-      drawnCards: []
-    };
-  },
-  beforeCreate() {
-    // axios.get('/api/trijumf/game/words').then(response => {
-    //   response.data.forEach(word => {
-    //     this.words.push(word);
-    //   });
-    // });
-    axios.get('/api/trijumf/game/words').then(response => {
-      this.words.push(
-        response.data[Math.floor(Math.random() * response.data.length)],
-        response.data[Math.floor(Math.random() * response.data.length)],
-        response.data[Math.floor(Math.random() * response.data.length)],
-        response.data[Math.floor(Math.random() * response.data.length)],
-        response.data[Math.floor(Math.random() * response.data.length)]
-      );
-    });
-  },
+  props: ['words'],
   name: 'Words.vue'
 };
 </script>
