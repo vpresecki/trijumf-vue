@@ -1,7 +1,7 @@
 const express = require("express");
 const mongodb = require("mongodb");
 const router = express.Router();
-const lineReader = require("line-reader");
+// const lineReader = require("line-reader");
 
 // let words = new Array();
 // lineReader.eachLine("./words.txt", line => {
