@@ -8,15 +8,9 @@ server.use("/api/trijumf/game", gameRoute);
 server.use(cors());
 
 // Handle production
-<<<<<<< HEAD
-if (process.env.NODE_ENV === "production") {
-  server.use(express.static(__dirname + "/public"));
-}
-=======
 // if (process.env.NODE_ENV === "production") {
 server.use(express.static(__dirname + "/public"));
 // }
->>>>>>> dev
 
 // Handle SPA
 server.get(/.*/, (req, res) => {
