@@ -4,7 +4,7 @@
       <component :words="words" :is="activeComponent"></component>
     </div>
     <div class="game-board">
-      <appTimer :words="words"></appTimer>
+      <appTimer :words="words" @emptyWords="words = $event"></appTimer>
     </div>
   </div>
 </template>
@@ -21,13 +21,6 @@ export default {
     return {
       words: []
     };
-  },
-  mounted() {
-    axios.get('/api/trijumf/game/words').then(response => {
-      response.data.forEach(word => {
-        this.words.push(word);
-      });
-    });
   },
 
   computed: {

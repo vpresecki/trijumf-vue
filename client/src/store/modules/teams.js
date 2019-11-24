@@ -48,11 +48,16 @@ export const teams = {
         currentActive.active = false;
       }
     },
-    updateScore: (state, goodAnswer) => {
-      if (goodAnswer) state.score += 1;
+    updateScore: (state, words) => {
+      const currentActive = state.teams.find(team => team.active === true);
+      words.forEach(word => {
+        if (word.goodAnswer === true) {
+          currentActive.score += 1;
+        }
+      });
     },
     bonusScore: (state, endTime) => {
-      let currentActive = state.teams.find(team => team.active === true);
+      const currentActive = state.teams.find(team => team.active === true);
       if (endTime >= 150) {
         currentActive.score += 10;
       } else if (endTime >= 120) {
@@ -79,8 +84,8 @@ export const teams = {
     changeActiveTeam({ commit }, state) {
       commit('changeActiveTeam', state);
     },
-    updateScore({ commit }, state, goodAnswer) {
-      commit('updateScore', state, goodAnswer);
+    updateScore({ commit }, state, words) {
+      commit('updateScore', state, words);
     },
     bonusScore({ commit }, state, endTime) {
       commit('bonusScore', state, endTime);

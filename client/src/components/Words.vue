@@ -19,8 +19,16 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   props: ['words'],
+  beforeCreate() {
+    axios.get('/api/trijumf/game/words').then(response => {
+      response.data.forEach(word => {
+        this.words.push(word);
+      });
+    });
+  },
   name: 'Words.vue'
 };
 </script>

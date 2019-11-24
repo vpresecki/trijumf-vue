@@ -6,7 +6,9 @@
         nextPlayer(),
           setEndTime(convertTime),
           checkBonusScore(),
-          changeActiveTeam()
+          updateScore(words),
+          changeActiveTeam(),
+          emptyWords()
       "
       id="next-player-button"
     >
@@ -25,13 +27,18 @@ export default {
       'nextPlayer',
       'setEndTime',
       'changeActiveTeam',
-      'bonusScore'
+      'bonusScore',
+      'updateScore'
     ]),
     checkBonusScore() {
       const scoredWords = this.words.filter(word => word.goodAnswer === true);
       scoredWords.length === 5
         ? this.$store.dispatch('bonusScore', this.$store.getters.getEndTime)
         : 0;
+    },
+    emptyWords() {
+      this.words = [];
+      this.$emit('emptyWords', this.words);
     }
   },
   computed: {
