@@ -1,8 +1,15 @@
 const express = require("express");
 const server = express();
 const cors = require("cors");
+const history = require("connect-history-api-fallback");
 
 server.use(cors());
+server.use(
+  history({
+    disableDotRule: true,
+    verbose: true
+  })
+);
 
 const gameRoute = require("./routes/words");
 server.use("/api/trijumf/game", gameRoute);
