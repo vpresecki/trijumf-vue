@@ -3,14 +3,6 @@ const server = express();
 const cors = require("cors");
 const history = require("connect-history-api-fallback");
 
-server.use(cors());
-server.use(
-  history({
-    disableDotRule: true,
-    verbose: true
-  })
-);
-
 const gameRoute = require("./routes/words");
 server.use("/api/trijumf/game", gameRoute);
 
@@ -23,6 +15,14 @@ if (process.env.NODE_ENV === "production") {
 server.get(/.*/, (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
+
+server.use(cors());
+server.use(
+  history({
+    disableDotRule: true,
+    verbose: true
+  })
+);
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Server started on port ${PORT}`));
