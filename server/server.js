@@ -9,7 +9,7 @@ server.use("/api/trijumf/game", gameRoute);
 
 // Handle production
 if (process.env.NODE_ENV === "production") {
-  server.use(express.static(__dirname + "/public"));
+  server.use(express.static(__dirname + "/public/"));
 }
 
 // Handle SPA
