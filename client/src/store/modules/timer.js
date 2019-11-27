@@ -27,6 +27,9 @@ export const timer = {
       state.interval = setInterval(() => {
         state.startTime > 0 ? state.startTime-- : (state.startTime = 0);
       }, 1000);
+    },
+    pauseTimer(state) {
+      clearInterval(state.interval);
     }
   },
   actions: {
@@ -38,6 +41,9 @@ export const timer = {
     },
     startTimeout({ commit }, state) {
       commit('startTimeout', state);
+    },
+    pauseTimer({ commit }, state) {
+      commit('pauseTimer', state);
     }
   }
 };

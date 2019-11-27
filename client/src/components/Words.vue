@@ -6,7 +6,7 @@
           <h3
             v-for="(word, index) in words"
             :key="index"
-            @click="word.goodAnswer = !word.goodAnswer"
+            @click="(word.goodAnswer = !word.goodAnswer), checkIfAllScored()"
             :class="{ 'good-answer': word.goodAnswer }"
             class="word"
           >
@@ -20,8 +20,32 @@
 
 <script>
 import axios from 'axios';
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
-  props: ['words'],
+  props: {
+    words: Array
+  },
+  data() {
+    return {
+      paused: false
+    };
+  },
+  methods: {
+    ...mapActions(['pauseTimer', 'startTimeout']),
+    checkIfAllScored() {
+      const scoredWords = this.words.filter(word => word.goodAnswer);
+      if (!this.paused) {
+        if (scoredWords.length === 5) {
+          this.$store.dispatch('pauseTimer');
+          this.paused = true;
+        }
+      } else {
+        this.$store.dispatch('startTimeout');
+        this.paused = false;
+      }
+    }
+  },
   beforeCreate() {
     axios.get('/api/trijumf/game/words').then(response => {
       response.data.forEach(word => {

@@ -4,7 +4,11 @@
       <component :words="words" :is="activeComponent"></component>
     </div>
     <div class="game-board">
-      <appTimer :words="words" @emptyWords="words = $event"></appTimer>
+      <appTimer
+        :words="words"
+        @emptyWords="words = $event"
+        @filterWords="scoredWords = $event"
+      ></appTimer>
     </div>
   </div>
 </template>
@@ -19,7 +23,8 @@ import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
-      words: []
+      words: [],
+      scoredWords: []
     };
   },
 

@@ -21,7 +21,9 @@
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 export default {
-  props: ['words'],
+  props: {
+    words: Array
+  },
   methods: {
     ...mapActions([
       'nextPlayer',
