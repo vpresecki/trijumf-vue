@@ -1,12 +1,14 @@
 <template>
   <div class="time">
     <p id="timer">{{ convertTime }}</p>
+    <component :winnerName="winnerName" :is="getWinner"></component>
     <button
       @click="
         nextPlayer(),
           setEndTime(convertTime),
           checkBonusScore(),
           updateScore(words),
+          checkWinner(),
           changeActiveTeam(),
           emptyWords()
       "
@@ -20,9 +22,16 @@
 <script>
 import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
+import Winner from './Winner';
 export default {
   props: {
     words: Array
+  },
+  data() {
+    return {
+      isWinner: false,
+      winnerName: ''
+    };
   },
   methods: {
     ...mapActions([
@@ -41,6 +50,14 @@ export default {
     emptyWords() {
       this.words = [];
       this.$emit('emptyWords', this.words);
+    },
+    checkWinner() {
+      Object.values(this.$store.getters.getTeams).forEach(team => {
+        if (team.score > 10) {
+          this.winnerName = team.name;
+          this.isWinner = true;
+        }
+      });
     }
   },
   computed: {
@@ -50,7 +67,13 @@ export default {
       let sec = this.$store.getters.getStartTime % 60;
       sec < 10 ? (sec = `0${sec}`) : sec;
       return `0${min}:${sec}`;
+    },
+    getWinner() {
+      return this.isWinner ? 'app-winner' : false;
     }
+  },
+  components: {
+    appWinner: Winner
   }
 };
 </script>

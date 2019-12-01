@@ -18,6 +18,7 @@
 import Card from '../components/Card';
 import Teams from '../components/Teams';
 import Footer from '../components/Footer';
+import { mapGetters } from 'vuex';
 export default {
   components: {
     appCard: Card,

@@ -1,8 +1,8 @@
 <template>
   <div class="teams">
     <div v-for="team in getTeams" :key="team.id" class="team">
-      <h3 :class="{'activeTeam': team.active }">{{ team.name }}</h3>
-      <span class="score-1">{{team.score}}</span>
+      <h3 :class="{ activeTeam: team.active }">{{ team.name }}</h3>
+      <span class="score-1">{{ team.score }}</span>
     </div>
   </div>
 </template>

@@ -180,6 +180,7 @@ footer {
 .modal {
   width: 50%;
   background-image: linear-gradient(to right, #f0f0f5 60%, #2ba7da 100%);
+  opacity: 90%;
   margin: 0 auto;
   position: absolute;
   top: 25%;
