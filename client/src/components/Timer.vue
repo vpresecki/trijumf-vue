@@ -12,7 +12,7 @@
           changeActiveTeam(),
           emptyWords()
       "
-      id="next-player-button"
+      class="next-player-button"
     >
       Sljedeći igrač &raquo;
     </button>
