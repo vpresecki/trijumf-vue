@@ -1,6 +1,6 @@
 export const timer = {
   state: {
-    startTime: 180,
+    startTime: 5,
     endTime: undefined,
     interval: undefined
   },
@@ -25,7 +25,7 @@ export const timer = {
     },
     startTimeout(state) {
       state.interval = setInterval(() => {
-        state.startTime > 0 ? state.startTime-- : (state.startTime = 0);
+        state.startTime > -1 ? state.startTime-- : (state.startTime = 0);
       }, 1000);
     },
     pauseTimer(state) {

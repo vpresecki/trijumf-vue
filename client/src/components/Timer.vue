@@ -72,6 +72,20 @@ export default {
       return this.isWinner ? 'app-winner' : false;
     }
   },
+  watch: {
+    convertTime: function(newTime, oldTime) {
+      if (this.$store.getters.getStartTime < 0) {
+        this.$store.dispatch('nextPlayer'),
+          this.$store.dispatch('setEndTime', this.convertTime),
+          this.checkBonusScore(),
+          this.$store.dispatch('updateScore', this.words),
+          this.checkWinner(),
+          this.$store.dispatch('changeActiveTeam'),
+          this.emptyWords();
+        alert('Vrijeme isteklo');
+      }
+    }
+  },
   components: {
     appWinner: Winner
   }
